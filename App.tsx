@@ -9,6 +9,7 @@ import GoalScreen from './views/GoalScreen.tsx';
 export default function App() {
   return (
     <View style={styles.container}>
+      <Text> Goals </Text>
       <GoalScreen />
       <StatusBar style="auto" />
     </View>

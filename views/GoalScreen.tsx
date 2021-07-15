@@ -7,25 +7,52 @@ const GoalScreen = (props: object) => {
   const [goals, setGoals] = useState([]);
 
   const addGoal = () => {
-    if(goals[goals.length - 1].name.trim().length === 0) {
-      return;
-    }
     let copy = goals.slice();
-    copy.push(new Goal());
+    copy.push(new Goal.Goal());
     setGoals(copy);
+  }
+
+  const onChangeGoalName = (id: string, name: string) => {
+    let copy = goals.slice();
+    for(var i = 0; i < copy.length; i++) {
+      if(copy[i].id === id) {
+        copy[i].name = name;
+        break;
+      }
+    }
+    setGoals(copy);
+  }
+
+  const removeGoal = (id: string) => {
+    let copy = goals.slice();
+    for(var i = 0; i < copy.length; i++) {
+      if(copy[i].id === id) {
+        copy.splice(i, 1);
+        break;
+      }
+    }
+    setGoals(copy);
+
   }
 
   return (
     <View>
       <SafeAreaView>
         {goals.map((goal: object) => {
-          console.log(goal);
           return (
-            <TextInput
-              key={goal.id}
-              style={styles.input}
-              placeholder={typeof(goal.id)}
-            />
+            <View>
+              <TextInput
+                key={goal.id}
+                style={styles.input}
+                onChangeText={(text) => {onChangeGoalName(goal.id, text)}}
+                placeholder="Enter Goal Name"
+              />
+              <Button
+                title="x"
+                color="red"
+                onPress={() => {removeGoal(goal.id)}}
+              />
+            </View>
           );
         })}
       </SafeAreaView>
