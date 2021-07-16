@@ -1,26 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Stack, NativeBaseProvider } from "native-base";
 
-import User from './models/User.ts';
+import { styles } from './styles/styles.js';
 
-import GoalScreen from './views/GoalScreen.tsx';
+import Home from './views/Home.tsx';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text> Goals </Text>
-      <GoalScreen />
-      <StatusBar style="auto" />
-    </View>
+    <NativeBaseProvider>
+      <Stack alignItems="center" style={styles.topSpacing}>
+        <Home />
+      </Stack>
+    </NativeBaseProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
