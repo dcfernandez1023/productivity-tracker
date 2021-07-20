@@ -7,10 +7,11 @@ const Controller = require('../controllers/GoalController.ts');
 
 const Insights = (props: object) => {
   const [insights, setInsights] = useState([]);
+  const [noInsights, setNoInsights] = useState(false);
 
   useEffect(() => {
     generateInsights();
-  }, []);
+  }, [props.title]);
 
   const generateInsights = () => {
     let data = [];
@@ -30,24 +31,42 @@ const Insights = (props: object) => {
       }
       for(var key in dates) {
         let item = dates[key];
-        let description = dates[key].completed.toString() + " out of " + (dates[key].completed + dates[key].incompleted).toString() + " completed";
-        data.push({time: key, title: "Goals Completed ("+key+")", description: description});
+        let title = "";
+        if(item.incompleted > 0) {
+          title = "Incomplete ❌";
+        }
+        else {
+          title = "Complete 🎉";
+        }
+        let description = dates[key].completed.toString() + " out of " + (dates[key].completed + dates[key].incompleted).toString() + " goals completed";
+        data.push({time: key, title: title, description: description});
       }
       data.sort((ele1, ele2) => {
-        return new Date(ele1).getTime() - new Date(ele2).getTime();
+        return new Date(ele1.time).getTime() - new Date(ele2.time).getTime();
       });
+      if(data.length === 0) {
+        setNoInsights(true);
+      }
+      else {
+        setNoInsights(false);
+      }
+      setInsights(data);
       console.log(data);
     }, (error) => {
       setInsights([]);
     });
   }
 
+  if(noInsights) {
+    return (
+      <Center> <Text> You have no data to be shown </Text> </Center>
+    );
+  }
   return (
-    <Center style={{marginTop: 30}}>
-      <Timeline
-        data={insights}
-      />
-    </Center>
+    <Timeline
+      data={insights}
+      style={{marginLeft: 15, marginTop: 15}}
+    />
   );
 }
 

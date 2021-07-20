@@ -55,7 +55,6 @@ const Home = (props: object) => {
           />
           <Footer.Screen
             name="Insights"
-            component={Insights}
             listeners={{
               tabPress: (e) => {
                 setTitle("Insights");
@@ -67,7 +66,9 @@ const Home = (props: object) => {
                 <MaterialIcons name="insights" size={24} color="black" />
               ),
             }}
-          />
+          >
+            {(props) => <Insights {...props} title={title} /> }
+          </Footer.Screen>
         </Footer.Navigator>
       </NavigationContainer>
     </View>
