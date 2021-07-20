@@ -1,6 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
+  white: {
+    backgroundColor: "white"
+  },
   fullWidthAndHeight: {
     width: "100%",
     height: "100%"
@@ -23,7 +26,8 @@ export const styles = StyleSheet.create({
   navbar: {
     //backgroundColor: "#D1F2EB",
     width: "100%",
-    padding: 15
+    padding: 15,
+    alignItems: "flex-start"
   },
   footerPadding: {
     padding: 25
@@ -37,4 +41,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     margin: 0,
   },
+  italic: {
+    fontStyle: "italic"
+  }
 });
