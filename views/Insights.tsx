@@ -42,7 +42,7 @@ const Insights = (props: object) => {
         data.push({time: key, title: title, description: description});
       }
       data.sort((ele1, ele2) => {
-        return new Date(ele1.time).getTime() - new Date(ele2.time).getTime();
+        return new Date(ele2.time).getTime() - new Date(ele2.time).getTime();
       });
       if(data.length === 0) {
         setNoInsights(true);
