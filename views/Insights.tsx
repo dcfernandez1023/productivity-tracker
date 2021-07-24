@@ -52,7 +52,6 @@ const Insights = (props: object) => {
           dates[date].incompleted++;
         }
       }
-      console.log(dates);
       for(var key in dates) {
         let item = dates[key];
         let title = "";
@@ -74,7 +73,6 @@ const Insights = (props: object) => {
       else {
         setNoInsights(false);
       }
-      console.log(data);
       setInsights(data);
     }, (error) => {
       setInsights([]);
